@@ -11,6 +11,7 @@ require_login('admin');
   <a href="courses_list.php">Courses</a>
   <a href="books_list.php">Books</a>
   <a href="students_list.php">Students</a>
+  <a href="reports.php">📊 Reports & Analytics</a>
   <a href="../logout.php">Logout</a>
 </nav>
 <main class="container">
