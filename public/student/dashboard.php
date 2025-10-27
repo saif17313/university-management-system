@@ -6,6 +6,11 @@ require_once __DIR__ . '/../../src/db.php';
 // Get current student ID
 $student_id = $_SESSION['user']['ref_id'];
 
+// Debug: Check if student_id is valid
+if (!$student_id || $student_id <= 0) {
+    die("Error: No valid student ID found in session. Please contact administrator.");
+}
+
 // Fetch student + dept + advisor info
 $stmt = $mysqli->prepare("
   SELECT s.s_id, s.s_name, s.cgpa,
