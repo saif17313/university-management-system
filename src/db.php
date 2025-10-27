@@ -1,5 +1,9 @@
 <?php
 // src/db.php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Update these values if your XAMPP uses different credentials
 $DB_HOST = '127.0.0.1';
 $DB_USER = 'root';
