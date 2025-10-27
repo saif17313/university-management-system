@@ -47,6 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </select>
       <button type="submit" class="btn">Login</button>
     </form>
+    
+    <div style="text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid #e5e7eb;">
+      <a href="index.php" style="color: #1e40af; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease;">
+        <span style="font-size: 1.2rem;">🏠</span> Back to Home
+      </a>
+    </div>
   </div>
 </body>
 </html>

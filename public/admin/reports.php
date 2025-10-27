@@ -7,19 +7,11 @@ require_once __DIR__ . '/../../src/db.php';
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Analytics | University Management System</title>
+  <title>Reports & Analytics | Admin Panel</title>
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
-  <nav class="navbar">
-    <a href="dashboard.php">🏠 Dashboard</a>
-    <a href="departments_list.php">Departments</a>
-    <a href="teachers_list.php">Teachers</a>
-    <a href="courses_list.php">Courses</a>
-    <a href="books_list.php">Books</a>
-    <a href="students_list.php">Students</a>
-    <a href="../logout.php">Logout</a>
-  </nav>
+<?php include __DIR__ . '/../../src/admin_nav.php'; ?>
 
   <main class="container">
     <h2>📊 Admin Reports & Analytics</h2>

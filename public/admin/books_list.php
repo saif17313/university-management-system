@@ -1,19 +1,14 @@
 <?php
+require_once __DIR__ . '/../../src/auth.php';
+require_login('admin');
 require_once __DIR__ . '/../../src/db.php';
 $res = $mysqli->query("SELECT book_no, book_name, author, edition FROM books ORDER BY book_no");
 $books = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
 ?>
 <!doctype html>
-<html><head><meta charset="utf-8"><title>Books</title><link rel="stylesheet" href="../../css/style.css"></head>
+<html><head><meta charset="utf-8"><title>Books | Admin Panel</title><link rel="stylesheet" href="../../css/style.css"></head>
 <body>
-  <nav class="navbar">
-    <a href="../index.php">🏠 Home</a>
-    <a href="departments_list.php">Departments</a>
-    <a href="teachers_list.php">Teachers</a>
-    <a href="courses_list.php">Courses</a>
-    <a href="books_list.php">Books</a>
-    <a href="students_list.php">Students</a>
-  </nav>
+<?php include __DIR__ . '/../../src/admin_nav.php'; ?>
   <main class="container">
     <h2>Books</h2>
     <a href="books_add.php" class="btn">➕ Add Book</a>

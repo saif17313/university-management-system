@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../src/auth.php';
+require_login('admin');
 // public/admin/departments_delete.php
 require_once __DIR__ . '/../../src/db.php';
 

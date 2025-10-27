@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../src/auth.php';
+require_login('admin');
 require_once __DIR__ . '/../../src/db.php';
 $code = isset($_GET['code']) ? strtoupper(trim($_GET['code'])) : '';
 if ($code === '') die("Invalid course code.");

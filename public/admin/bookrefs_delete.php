@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../src/auth.php';
+require_login('admin');
 require_once __DIR__ . '/../../src/db.php';
 $book_no = isset($_GET['book_no']) ? intval($_GET['book_no']) : 0;
 $course_no = isset($_GET['course_no']) ? strtoupper(trim($_GET['course_no'])) : '';

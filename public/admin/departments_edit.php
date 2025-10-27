@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../src/auth.php';
+require_login('admin');
 // public/admin/departments_edit.php
 require_once __DIR__ . '/../../src/db.php';
 
@@ -74,14 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
-  <nav class="navbar">
-    <a href="../index.php">🏠 Home</a>
-    <a href="departments_list.php">Departments</a>
-    <a href="teachers_list.php">Teachers</a>
-    <a href="courses_list.php">Courses</a>
-    <a href="books_list.php">Books</a>
-    <a href="students_list.php">Students</a>
-  </nav>
+  <?php include __DIR__ . '/../../src/admin_nav.php'; ?>
   <main class="container">
     <h2>Edit Department #<?=htmlspecialchars($dept['dept_id'])?></h2>
 
