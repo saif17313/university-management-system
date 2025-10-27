@@ -174,15 +174,6 @@
       <h2>Ready to Get Started?</h2>
       <p>Login to access your personalized dashboard</p>
       <a href="login.php" class="btn" style="font-size: 1.1rem; padding: 1rem 2.5rem;">Login Now</a>
-      
-      <div style="margin-top: 3rem; padding: 2rem; background: #f9fafb; border-radius: 0.75rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-        <h3 style="color: #1e40af; margin-bottom: 1rem;">Demo Credentials</h3>
-        <div style="text-align: left; display: inline-block;">
-          <p style="margin: 0.5rem 0;"><strong>Admin:</strong> admin / admin123</p>
-          <p style="margin: 0.5rem 0;"><strong>Teacher:</strong> teacher1 / teacher123</p>
-          <p style="margin: 0.5rem 0;"><strong>Student:</strong> student1 / student123</p>
-        </div>
-      </div>
     </section>
   </main>
 
