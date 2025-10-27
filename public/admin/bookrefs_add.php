@@ -30,7 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!doctype html>
 <html><head><meta charset="utf-8"><title>Link Book to Course</title><link rel="stylesheet" href="../../css/style.css"></head>
 <body>
-  <nav><a href="../index.php">Home</a> | <a href="bookrefs_list.php">Book References</a></nav>
+  <nav class="navbar">
+    <a href="../index.php">🏠 Home</a>
+    <a href="departments_list.php">Departments</a>
+    <a href="teachers_list.php">Teachers</a>
+    <a href="courses_list.php">Courses</a>
+    <a href="books_list.php">Books</a>
+    <a href="students_list.php">Students</a>
+  </nav>
   <main class="container">
     <h2>Link Book to Course</h2>
     <?php if ($success): ?><div class="success"><?=htmlspecialchars($success)?></div><?php endif; ?>
@@ -55,5 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <button class="btn" type="submit">Link</button>
     </form>
+    
+    <p><a href="bookrefs_list.php" class="btn">← Back to List</a></p>
   </main>
 </body></html>

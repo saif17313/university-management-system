@@ -26,8 +26,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $salary = $_POST['salary'] !== '' ? floatval($_POST['salary']) : null;
     $dept_id = isset($_POST['dept_id']) && $_POST['dept_id'] !== '' ? intval($_POST['dept_id']) : null;
 
-    if ($t_name === '') $errors[] = "Teacher name is required.";
-    if ($salary === null || $salary < 0) $errors[] = "Salary must be a non-negative number.";
+    // Stronger validation
+    if ($t_name === '') {
+        $errors[] = "Teacher name is required.";
+    } elseif (!preg_match("/^[A-Za-z .'-]+$/", $t_name)) {
+        $errors[] = "Teacher name may only contain letters, spaces, periods, hyphens, and apostrophes.";
+    } elseif (strlen($t_name) < 2 || strlen($t_name) > 100) {
+        $errors[] = "Teacher name must be between 2 and 100 characters.";
+    }
+    
+    if (!in_array($gender, ['Male', 'Female', 'Other'])) {
+        $errors[] = "Gender must be Male, Female, or Other.";
+    }
+    
+    if ($salary === null) {
+        $errors[] = "Salary is required.";
+    } elseif (!is_numeric($_POST['salary'] ?? '')) {
+        $errors[] = "Salary must be a valid number.";
+    } elseif ($salary < 0) {
+        $errors[] = "Salary must be a positive number.";
+    } elseif ($salary > 10000000) {
+        $errors[] = "Salary seems unrealistic (max 10,000,000).";
+    }
 
     if (empty($errors)) {
         $u = $mysqli->prepare("UPDATE teachers SET t_name = ?, gender = ?, salary = ?, dept_id = ? WHERE t_id = ?");
@@ -53,7 +73,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
-  <nav><a href="teachers_list.php">Back to list</a></nav>
+  <nav class="navbar">
+    <a href="../index.php">🏠 Home</a>
+    <a href="departments_list.php">Departments</a>
+    <a href="teachers_list.php">Teachers</a>
+    <a href="courses_list.php">Courses</a>
+    <a href="books_list.php">Books</a>
+    <a href="students_list.php">Students</a>
+  </nav>
   <main class="container">
     <h2>Edit Teacher #<?=htmlspecialchars($teacher['t_id'])?></h2>
 
@@ -83,6 +110,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <button type="submit" class="btn">Save Changes</button>
     </form>
+    
+    <p><a href="teachers_list.php" class="btn">← Back to List</a></p>
   </main>
 </body>
 </html>

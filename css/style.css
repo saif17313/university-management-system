@@ -113,3 +113,61 @@ footer {
 .login-container button:hover { background: #004a99; }
 
 body { background-color: #f0f4f8; }
+/* --- Improved Table and Form Layout --- */
+.container h2 {
+  border-bottom: 3px solid #003366;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+}
+
+form label {
+  font-weight: 500;
+  margin-top: 8px;
+  display: block;
+}
+
+form input:invalid {
+  border-color: red;
+}
+form input:valid {
+  border-color: #ccc;
+}
+
+.navbar {
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+}
+.navbar a {
+  margin-right: 15px;
+  color: #003366;
+  font-weight: 500;
+  text-decoration: none;
+}
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+.success, .errors {
+  margin-top: 10px;
+}
+
+/* Highlight delete buttons */
+a.delete-btn {
+  color: #c00;
+  font-weight: 600;
+}
+a.delete-btn:hover {
+  text-decoration: underline;
+}
+
+/* Responsive layout */
+@media (max-width: 700px) {
+  .data-table th, .data-table td {
+    font-size: 14px;
+  }
+  form input, form select {
+    font-size: 14px;
+  }
+}
+

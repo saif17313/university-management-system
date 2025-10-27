@@ -25,9 +25,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $faculty = trim($_POST['faculty'] ?? '');
     $no_of_students = intval($_POST['no_of_students'] ?? 0);
 
-    if ($dept_name === '') $errors[] = "Department name is required.";
-    if ($faculty === '') $errors[] = "Faculty is required.";
-    if ($no_of_students < 0) $errors[] = "Number of students cannot be negative.";
+    // Stronger validation
+    if ($dept_name === '') {
+        $errors[] = "Department name is required.";
+    } elseif (!preg_match("/^[A-Za-z0-9 .&'-]+$/", $dept_name)) {
+        $errors[] = "Department name may only contain letters, numbers, spaces, and basic punctuation.";
+    } elseif (strlen($dept_name) > 100) {
+        $errors[] = "Department name must not exceed 100 characters.";
+    }
+    
+    if ($faculty === '') {
+        $errors[] = "Faculty is required.";
+    } elseif (!preg_match("/^[A-Za-z0-9 .&'-]+$/", $faculty)) {
+        $errors[] = "Faculty name may only contain letters, numbers, spaces, and basic punctuation.";
+    } elseif (strlen($faculty) > 100) {
+        $errors[] = "Faculty name must not exceed 100 characters.";
+    }
+    
+    if (!is_numeric($_POST['no_of_students'] ?? '')) {
+        $errors[] = "Number of students must be a valid number.";
+    } elseif ($no_of_students < 0) {
+        $errors[] = "Number of students cannot be negative.";
+    } elseif ($no_of_students > 100000) {
+        $errors[] = "Number of students seems unrealistic (max 100,000).";
+    }
 
     if (empty($errors)) {
         $u = $mysqli->prepare("UPDATE departments SET dept_name = ?, faculty = ?, no_of_students = ? WHERE dept_id = ?");
@@ -53,7 +74,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
-  <nav><a href="departments_list.php">Back to list</a></nav>
+  <nav class="navbar">
+    <a href="../index.php">🏠 Home</a>
+    <a href="departments_list.php">Departments</a>
+    <a href="teachers_list.php">Teachers</a>
+    <a href="courses_list.php">Courses</a>
+    <a href="books_list.php">Books</a>
+    <a href="students_list.php">Students</a>
+  </nav>
   <main class="container">
     <h2>Edit Department #<?=htmlspecialchars($dept['dept_id'])?></h2>
 
@@ -74,6 +102,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <button type="submit" class="btn">Save Changes</button>
     </form>
+    
+    <p><a href="departments_list.php" class="btn">← Back to List</a></p>
   </main>
 </body>
 </html>

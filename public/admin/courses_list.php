@@ -13,9 +13,18 @@ $courses = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
 <head><meta charset="utf-8"><title>Courses</title>
 <link rel="stylesheet" href="../../css/style.css"></head>
 <body>
-  <nav><a href="../index.php">Home</a> | <a href="courses_add.php">Add Course</a></nav>
+  <nav class="navbar">
+    <a href="../index.php">🏠 Home</a>
+    <a href="departments_list.php">Departments</a>
+    <a href="teachers_list.php">Teachers</a>
+    <a href="courses_list.php">Courses</a>
+    <a href="books_list.php">Books</a>
+    <a href="students_list.php">Students</a>
+  </nav>
   <main class="container">
     <h2>Courses</h2>
+    <a href="courses_add.php" class="btn">➕ Add Course</a>
+
     <table class="data-table">
       <thead><tr><th>Code</th><th>Name</th><th>Credit</th><th>Department</th><th>Actions</th></tr></thead>
       <tbody>
@@ -28,7 +37,7 @@ $courses = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
             <td><?=htmlspecialchars($c['credit'])?></td>
             <td><?=htmlspecialchars($c['dept_name'] ?? '—')?></td>
             <td><a href="courses_edit.php?code=<?=urlencode($c['course_no'])?>">Edit</a> |
-                <a href="courses_delete.php?code=<?=urlencode($c['course_no'])?>" onclick="return confirm('Delete this course?')">Delete</a></td>
+                <a href="courses_delete.php?code=<?=urlencode($c['course_no'])?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this course?')">Delete</a></td>
           </tr>
         <?php endforeach; endif; ?>
       </tbody>

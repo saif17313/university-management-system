@@ -27,9 +27,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dept_id = isset($_POST['dept_id']) ? intval($_POST['dept_id']) : null;
     $advisor_id = isset($_POST['advisor_id']) && $_POST['advisor_id'] !== '' ? intval($_POST['advisor_id']) : null;
 
-    if ($s_name === '') $errors[] = "Student name is required.";
-    if ($cgpa === null || $cgpa < 0 || $cgpa > 4) $errors[] = "CGPA must be between 0 and 4.";
-    if ($dept_id <= 0) $errors[] = "Department is required.";
+    // Stronger validation
+    if ($s_name === '') {
+        $errors[] = "Student name is required.";
+    } elseif (!preg_match("/^[A-Za-z .'-]+$/", $s_name)) {
+        $errors[] = "Student name may only contain letters, spaces, periods, hyphens, and apostrophes.";
+    } elseif (strlen($s_name) < 2 || strlen($s_name) > 100) {
+        $errors[] = "Student name must be between 2 and 100 characters.";
+    }
+    
+    if ($cgpa === null) {
+        $errors[] = "CGPA is required.";
+    } elseif (!is_numeric($_POST['cgpa'] ?? '')) {
+        $errors[] = "CGPA must be a valid number.";
+    } elseif ($cgpa < 0 || $cgpa > 4) {
+        $errors[] = "CGPA must be between 0.00 and 4.00.";
+    }
+    
+    if ($dept_id === null || $dept_id <= 0) {
+        $errors[] = "Department is required.";
+    }
 
     if (empty($errors)) {
         $u = $mysqli->prepare("UPDATE students SET s_name = ?, cgpa = ?, dept_id = ?, advisor_id = ? WHERE s_id = ?");
@@ -53,7 +70,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
-  <nav><a href="students_list.php">Back to list</a></nav>
+  <nav class="navbar">
+    <a href="../index.php">🏠 Home</a>
+    <a href="departments_list.php">Departments</a>
+    <a href="teachers_list.php">Teachers</a>
+    <a href="courses_list.php">Courses</a>
+    <a href="books_list.php">Books</a>
+    <a href="students_list.php">Students</a>
+  </nav>
   <main class="container">
     <h2>Edit Student #<?=htmlspecialchars($student['s_id'])?></h2>
     <?php if ($success): ?><div class="success"><?=htmlspecialchars($success)?></div><?php endif; ?>
@@ -84,6 +108,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <button type="submit" class="btn">Save Changes</button>
     </form>
+    
+    <p><a href="students_list.php" class="btn">← Back to List</a></p>
   </main>
 </body>
 </html>

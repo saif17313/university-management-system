@@ -14,9 +14,17 @@ $departments = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
-  <nav><a href="../index.php">Home</a> | <a href="departments_add.php">Add Department</a></nav>
+  <nav class="navbar">
+    <a href="../index.php">🏠 Home</a>
+    <a href="departments_list.php">Departments</a>
+    <a href="teachers_list.php">Teachers</a>
+    <a href="courses_list.php">Courses</a>
+    <a href="books_list.php">Books</a>
+    <a href="students_list.php">Students</a>
+  </nav>
   <main class="container">
     <h2>Departments</h2>
+    <a href="departments_add.php" class="btn">➕ Add Department</a>
 
     <table class="data-table">
       <thead>
@@ -40,7 +48,7 @@ $departments = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
               <td><?=htmlspecialchars($d['no_of_students'])?></td>
               <td>
                 <a href="departments_edit.php?id=<?=urlencode($d['dept_id'])?>">Edit</a> |
-                <a href="departments_delete.php?id=<?=urlencode($d['dept_id'])?>" onclick="return confirm('Delete this department?')">Delete</a>
+                <a href="departments_delete.php?id=<?=urlencode($d['dept_id'])?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this department?')">Delete</a>
               </td>
             </tr>
           <?php endforeach; ?>

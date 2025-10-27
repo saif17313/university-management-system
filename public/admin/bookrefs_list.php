@@ -11,9 +11,18 @@ $refs = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
 <!doctype html>
 <html><head><meta charset="utf-8"><title>Book References</title><link rel="stylesheet" href="../../css/style.css"></head>
 <body>
-  <nav><a href="../index.php">Home</a> | <a href="bookrefs_add.php">Add Link</a></nav>
+  <nav class="navbar">
+    <a href="../index.php">🏠 Home</a>
+    <a href="departments_list.php">Departments</a>
+    <a href="teachers_list.php">Teachers</a>
+    <a href="courses_list.php">Courses</a>
+    <a href="books_list.php">Books</a>
+    <a href="students_list.php">Students</a>
+  </nav>
   <main class="container">
     <h2>Book References</h2>
+    <a href="bookrefs_add.php" class="btn">➕ Add Link</a>
+
     <table class="data-table">
       <thead><tr><th>Book ID</th><th>Book Name</th><th>Course Code</th><th>Course Name</th><th>Action</th></tr></thead>
       <tbody>
@@ -24,7 +33,7 @@ $refs = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
             <td><?=htmlspecialchars($r['book_name'])?></td>
             <td><?=htmlspecialchars($r['course_no'])?></td>
             <td><?=htmlspecialchars($r['course_name'])?></td>
-            <td><a href="bookrefs_delete.php?book_no=<?=urlencode($r['book_no'])?>&course_no=<?=urlencode($r['course_no'])?>" onclick="return confirm('Remove this link?')">Remove</a></td>
+            <td><a href="bookrefs_delete.php?book_no=<?=urlencode($r['book_no'])?>&course_no=<?=urlencode($r['course_no'])?>" class="delete-btn" onclick="return confirm('Are you sure you want to remove this link?')">Remove</a></td>
           </tr>
         <?php endforeach; endif; ?>
       </tbody>
