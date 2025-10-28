@@ -1,5 +1,6 @@
 <?php
 // src/auth.php
+session_start();
 require_once __DIR__ . '/db.php';
 
 function login($username, $password) {
@@ -11,7 +12,7 @@ function login($username, $password) {
     $user = $result->fetch_assoc();
     $stmt->close();
 
-    if ($user && hash('sha256', $password) === $user['password_hash']) {
+    if ($user && $password === $user['password_hash']) {
         $_SESSION['user'] = [
             'id' => $user['user_id'],
             'username' => $user['username'],
